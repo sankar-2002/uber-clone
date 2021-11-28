@@ -51,7 +51,7 @@ bg-white px-4
 `
 
 const BackButton = tw.img`
-h-12
+h-12 cursor-pointer
 `
 
 const FromToIcons = tw.div`
@@ -85,5 +85,5 @@ const StarIcon = tw.img`
 bg-gray-400 w-10 h-10 p-2 rounded-full mr-2
 `
 const ConfirmButton = tw.div`
-bg-gray-400 flex items-center px-2 py-2 justify-center text-xl 
+bg-black flex items-center px-2 py-2 justify-center text-xl text-white mt-2 mx-4 cursor-pointer
 `
