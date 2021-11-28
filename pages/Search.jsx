@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import tw from 'tailwind-styled-components'
 import Link from 'next/link'
 
 const Search = () => {
+
+    const [pickup, setpickup] = useState("");
+    const [dropoff, setDropoff] = useState("");
+
+    console.log(pickup);
+    console.log(dropoff);
+
+
     return (
         <Wrapper>
             <ButtonContainer>
                 <Link href="/">
-                <BackButton src="https://img.icons8.com/ios-filled/50/000000/left.png" />
+                    <BackButton src="https://img.icons8.com/ios-filled/50/000000/left.png" />
                 </Link>
             </ButtonContainer>
 
@@ -15,12 +23,24 @@ const Search = () => {
                 <FromToIcons>
                     <Circle src="https://img.icons8.com/ios-filled/50/9CA3AF/filled-circle.png" />
                     <Line src="https://img.icons8.com/ios/50/9CA3AF/vertical-line.png" />
-                    <Square src="https://static.vecteezy.com/system/resources/previews/001/209/957/non_2x/square-png.png"/>
+                    <Square src="https://static.vecteezy.com/system/resources/previews/001/209/957/non_2x/square-png.png" />
                 </FromToIcons>
 
                 <InputBoxes>
-                  <Input placeholder="Enter pickup Location"/>
-                  <Input placeholder="Where to?"/>
+
+                    <Input
+                        placeholder="Enter pickup Location"
+                        value={pickup}
+                        onChange={(e) => setpickup(e.target.value)}
+                    />
+
+                    <Input placeholder="Where to?"
+                        value={dropoff}
+                        onChange={(e) => setDropoff(
+                            e.target.value
+                        )}
+                    />
+
                 </InputBoxes>
 
                 <PlusIcons src="https://img.icons8.com/ios/50/000000/plus-math.png" />
@@ -28,13 +48,23 @@ const Search = () => {
             </InputContainer>
 
             <SavedPlaces>
-                <StarIcon src="https://img.icons8.com/ios-filled/50/ffffff/star--v1.png"/>
+                <StarIcon src="https://img.icons8.com/ios-filled/50/ffffff/star--v1.png" />
                 Saved Places
             </SavedPlaces>
 
-            <ConfirmButton>
-                Confirm Location
-            </ConfirmButton>
+            {/* //passing query parameter into next page */}
+
+            <Link href={{
+                pathname: "/confirm",
+                query: {
+                    pickup: pickup,
+                    dropoff: dropoff,
+                }
+            }}>
+                <ConfirmButton>
+                    Confirm Location
+                </ConfirmButton>
+            </Link>
         </Wrapper>
 
 
