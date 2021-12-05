@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components'
 import Map from './components/Map'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import RideSelector from './components/RideSelector'
 import Link from 'next/dist/client/link'
 
 const confirm = () => {
 
     const router = useRouter();
-    const {pickup, dropoff} = router.query
+    const { pickup, dropoff } = router.query
 
-    const [pickupCoordinates, setpickupCoordinates] = useState()
-    const [dropoffCoordinates, setdropoffCoordinates] = useState()
+    const [pickupCoordinates, setpickupCoordinates] = useState([0, 0])
+    const [dropoffCoordinates, setdropoffCoordinates] = useState([0, 0])
 
 
     const getPickupCoordinates = (pickup) => {
         fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
             new URLSearchParams({
                 access_token: "pk.eyJ1Ijoic2Fua2FyLTEyMyIsImEiOiJja3c5NnFsdGYyNXY5MnVtcDk4NTJ1cjFqIn0.NmEy9lh8s5tWkC-hZjcM6g",
-                limit: 1
+                limit: 1,
             })
         )
             .then(response => response.json())
@@ -50,6 +50,11 @@ const confirm = () => {
 
     return (
         <Wrapper>
+            <ButtonContainer>
+                <Link href="/Search">
+                    <BackButton src='https://img.icons8.com/ios-filled/50/000000/left.png' />
+                </Link>
+            </ButtonContainer>
 
 
             <Map
@@ -58,11 +63,14 @@ const confirm = () => {
             />
 
             <RideContainer>
-            
-                <RideSelector/>
+
+                <RideSelector
+                    pickupCoordinates={pickupCoordinates}
+                    dropoffCoordinates={dropoffCoordinates}
+                />
 
                 <ConfirmButtonContainer>
-                    <ConfirmButton>Confirm UberX</ConfirmButton>      
+                    <ConfirmButton>Confirm UberX</ConfirmButton>
                 </ConfirmButtonContainer>
 
             </RideContainer>
@@ -85,6 +93,13 @@ flex-1 flex flex-col h-1/2
 `
 
 const ConfirmButtonContainer = tw.div`
+
+`
+const ButtonContainer = tw.div`
+rounded-full absolute top-4 left-4 z-10 bg-white shadow-md cursor-pointer
+`
+const BackButton = tw.img`
+h-full object-contain
 
 `
 

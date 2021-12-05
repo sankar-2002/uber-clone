@@ -14,31 +14,31 @@ function Map(props) {
             zoom: 3,
         });
 
-        if(props.pickupCoordinates) {
+        if (props.pickupCoordinates) {
             addToMap(map, props.pickupCoordinates);
         }
 
-        if(props.dropoffCoordinates) {
+        if (props.dropoffCoordinates) {
             addToMap(map, props.dropoffCoordinates);
         }
 
-        if(props.pickupCoordinates, props.dropoffCoordinates) {
+        if (props.pickupCoordinates, props.dropoffCoordinates) {
             map.fitBounds(
                 [
                     props.dropoffCoordinates,
                     props.pickupCoordinates
                 ], {
-                    padding: 60
-                }
+                padding: 60
+            }
             )
         }
 
-    },[props.pickupCoordinates, props.dropoffCoordinates]);
+    }, [props.pickupCoordinates, props.dropoffCoordinates]);
 
     const addToMap = (map, coordinates) => {
         const marker1 = new mapboxgl.Marker()
-        .setLngLat(coordinates)
-        .addTo(map);
+            .setLngLat(coordinates)
+            .addTo(map);
     }
 
 
